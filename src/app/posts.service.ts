@@ -28,6 +28,7 @@ export class PostsService {
       .pipe(
         map((responseData: { [key: string]: Post }) => {
           const postsArray: Post[] = [];
+          // to convert the object to an array
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
               postsArray.push({ ...responseData[key], id: key });
@@ -36,5 +37,9 @@ export class PostsService {
           return postsArray;
         })
       );
+  }
+
+  clearPosts() {
+    return this.http.delete(`https://maxi-ang.firebaseio.com/posts.json/`);
   }
 }
